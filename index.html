@@ -1,0 +1,904 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Universe for Aishh 💗</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #EDC8FF;
+  --ink: #482b5d;
+  --deep: #6d4386;
+  --pink: #e982b7;
+  --pink2: #ffb7d9;
+  --cream: #fff8ff;
+  --line: rgba(92,54,117,.18);
+  --muted: #785c8c;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+button, a {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+#sparkles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floaty {
+  position: absolute;
+  opacity: .55;
+  animation: drift linear infinite;
+  user-select: none;
+}
+
+@keyframes drift {
+  from { transform: translateY(110vh) rotate(0deg); }
+  to { transform: translateY(-15vh) rotate(360deg); }
+}
+
+nav {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 5vw;
+  background: rgba(237,200,255,.82);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(92,54,117,.08);
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.navright {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+nav a {
+  font-size: .78rem;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 7px;
+}
+
+.music-btn, .pill {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.38);
+  color: var(--ink);
+  padding: 10px 15px;
+  border-radius: 999px;
+  transition: .25s;
+}
+
+.music-btn:hover, .pill:hover {
+  background: #fff5ff;
+  transform: translateY(-2px);
+}
+
+main, section, footer {
+  position: relative;
+  z-index: 1;
+}
+
+section {
+  padding: 100px 7vw;
+  scroll-margin-top: 65px;
+}
+
+.hero {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding-top: 120px;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    rgba(255,255,255,.54),
+    transparent 62%
+  );
+}
+
+.hero-inner {
+  max-width: 850px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: .23em;
+  font-size: .7rem;
+  font-weight: 600;
+  color: var(--deep);
+  margin-bottom: 23px;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: clamp(3.2rem,9vw,7.2rem);
+  line-height: .99;
+  letter-spacing: -.04em;
+}
+
+h1 em {
+  color: #a84f91;
+  font-weight: 400;
+}
+
+.hero p {
+  max-width: 570px;
+  margin: 25px auto 0;
+  line-height: 1.8;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.primary {
+  background: var(--ink);
+  color: white;
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 22px;
+  box-shadow: 0 10px 28px rgba(72,43,93,.16);
+  transition: .25s;
+}
+
+.primary:hover {
+  transform: translateY(-2px);
+}
+
+.scrollhint {
+  margin-top: 62px;
+  font-size: .72rem;
+  letter-spacing: .15em;
+  color: var(--muted);
+}
+
+.scrollhint span {
+  display: block;
+  font-size: 1.3rem;
+  margin-top: 8px;
+  animation: bob 1.5s infinite;
+}
+
+@keyframes bob {
+  50% { transform: translateY(5px); }
+}
+
+.section-head {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 42px;
+}
+
+.section-head .eyebrow {
+  margin-bottom: 12px;
+}
+
+h2 {
+  font-size: clamp(2.3rem,5vw,4rem);
+  line-height: 1.1;
+}
+
+.section-head p {
+  color: var(--muted);
+  line-height: 1.8;
+  margin-top: 15px;
+}
+
+.note-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 16px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.note {
+  background: rgba(255,255,255,.43);
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: 22px;
+  padding: 26px 24px;
+  min-height: 210px;
+  transition: .3s;
+  box-shadow: 0 12px 35px rgba(92,54,117,.06);
+}
+
+.note:hover {
+  transform: translateY(-5px) rotate(-.5deg);
+  background: rgba(255,255,255,.66);
+}
+
+.note .emoji {
+  font-size: 1.7rem;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.note h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.note p {
+  font-size: .92rem;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+.birthday-band {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px 28px;
+  border-radius: 28px;
+  background: rgba(255,255,255,.43);
+  border: 1px solid rgba(255,255,255,.7);
+  text-align: center;
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 28px 0 16px;
+}
+
+.timebox {
+  width: 105px;
+  padding: 17px 10px;
+  background: rgba(255,255,255,.63);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.8);
+}
+
+.timebox strong {
+  display: block;
+  font-size: 2rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.timebox span {
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--muted);
+}
+
+#countLabel {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.distance-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1000px;
+  margin: auto;
+  align-items: stretch;
+}
+
+.map-card, .distance-copy {
+  border-radius: 26px;
+  background: rgba(255,255,255,.43);
+  border: 1px solid rgba(255,255,255,.72);
+  overflow: hidden;
+}
+
+.map-card {
+  padding: 15px;
+  min-height: 350px;
+}
+
+.map-art {
+  position: relative;
+  min-height: 320px;
+  height: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background-color: #f8e6ff;
+  background-image:
+    linear-gradient(35deg,transparent 46%,rgba(166,113,190,.16) 47%,rgba(166,113,190,.16) 49%,transparent 50%),
+    linear-gradient(145deg,transparent 42%,rgba(255,255,255,.8) 43%,rgba(255,255,255,.8) 45%,transparent 46%),
+    radial-gradient(ellipse at 20% 25%,#d7f0ce 0 10%,transparent 11%),
+    radial-gradient(ellipse at 83% 80%,#d7f0ce 0 13%,transparent 14%);
+}
+
+.road {
+  position: absolute;
+  left: 19%;
+  top: 28%;
+  width: 64%;
+  height: 44%;
+  border-top: 3px dashed #bd68a9;
+  border-radius: 50%;
+  transform: rotate(25deg);
+}
+
+.pin {
+  position: absolute;
+  text-align: center;
+  font-size: 1.65rem;
+  filter: drop-shadow(0 4px 4px rgba(72,43,93,.15));
+}
+
+.pin small {
+  display: block;
+  font-size: .75rem;
+  font-weight: 600;
+  background: rgba(255,255,255,.8);
+  padding: 5px 9px;
+  border-radius: 99px;
+  margin-top: 3px;
+  white-space: nowrap;
+}
+
+.pin.islamabad {
+  left: 11%;
+  top: 17%;
+}
+
+.pin.jhelum {
+  right: 9%;
+  bottom: 15%;
+}
+
+.map-heart {
+  position: absolute;
+  left: 48%;
+  top: 48%;
+  font-size: 1.6rem;
+  animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+  50% { transform: scale(1.2); }
+}
+
+.map-caption {
+  text-align: center;
+  font-size: .72rem;
+  color: var(--muted);
+  padding: 12px 0 0;
+}
+
+.distance-copy {
+  padding: clamp(28px,4vw,48px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.distance-copy h3 {
+  font-size: 2rem;
+  margin-bottom: 14px;
+}
+
+.distance-copy p {
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.km {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.7rem;
+  color: #a84f91;
+  line-height: 1;
+}
+
+.km span {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+.map-link {
+  display: inline-block;
+  color: var(--deep);
+  margin-top: 10px;
+  text-underline-offset: 4px;
+  font-size: .85rem;
+}
+
+.letter-wrap {
+  max-width: 750px;
+  margin: auto;
+  position: relative;
+}
+
+.letter {
+  background: #fff8ff;
+  border-radius: 8px 25px 25px 8px;
+  padding: clamp(28px,6vw,60px);
+  box-shadow: 0 22px 55px rgba(92,54,117,.12);
+  border-left: 7px solid #e982b7;
+  transform: rotate(-.5deg);
+}
+
+.letter .stamp {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.letter p {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.1rem,2.2vw,1.35rem);
+  line-height: 1.95;
+  color: #634775;
+  margin-bottom: 17px;
+}
+
+.letter .sign {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.4rem;
+  color: #a84f91;
+  text-align: right;
+  margin-top: 25px;
+}
+
+.final {
+  min-height: 70vh;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(255,255,255,.55),
+    transparent 65%
+  );
+}
+
+.final h2 {
+  max-width: 850px;
+  margin: auto;
+}
+
+.big-heart {
+  font-size: 3rem;
+  margin-bottom: 22px;
+  animation: bob 2s infinite;
+}
+
+.final p {
+  color: var(--muted);
+  margin-top: 20px;
+  line-height: 1.8;
+}
+
+footer {
+  text-align: center;
+  padding: 28px 15px 38px;
+  font-size: .8rem;
+  color: var(--muted);
+  border-top: 1px solid rgba(92,54,117,.1);
+}
+
+footer strong {
+  color: #8d4eaa;
+  font-weight: 600;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .8s, transform .8s;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media(max-width:760px) {
+  nav { padding: 13px 4vw; }
+  .navlinks { display: none; }
+  nav a { display: none; }
+  .note-grid { grid-template-columns: 1fr; }
+  .distance-layout { grid-template-columns: 1fr; }
+  .timebox { width: 74px; }
+  .timebox strong { font-size: 1.55rem; }
+  section { padding: 78px 5vw; }
+  .map-card { min-height: 300px; }
+  .map-art { min-height: 280px; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div id="sparkles" aria-hidden="true"></div>
+
+<nav>
+  <div class="logo">A tiny place for Aish 💗</div>
+
+  <div class="navright navlinks">
+    <a href="#little-things">Little things</a>
+    <a href="#countdown">Birthday</a>
+    <a href="#distance">Our map</a>
+    <a href="#letter">A note</a>
+  </div>
+
+  <button class="music-btn" id="musicBtn" type="button">
+    ♫ Play our song
+  </button>
+</nav>
+
+<audio id="birthdaySong" loop preload="auto">
+  <source src="aishh-song.mp3" type="audio/mpeg">
+</audio>
+
+<main>
+<section class="hero" id="top">
+ <div class="hero-inner reveal show">
+  <div class="eyebrow">A little birthday corner · made just for you</div>
+
+  <h1>Hey, <em>Aish.</em><br>This one's yours. 💗</h1>
+
+  <p>
+    For the girl who lives a few cities away but somehow still gets
+    a little corner of my everyday life. Here's a tiny internet home
+    filled with pink hearts, starry things, and all the birthday love
+    I could fit on a screen.
+  </p>
+
+  <div class="hero-buttons">
+    <a class="primary" href="#little-things" style="text-decoration:none">
+      Open your little universe ✨
+    </a>
+    <a class="pill" href="#countdown" style="text-decoration:none">
+      Birthday countdown ↓
+    </a>
+  </div>
+
+  <div class="scrollhint">
+    KEEP SCROLLING, BIRTHDAY GIRL
+    <span>♡</span>
+  </div>
+ </div>
+</section>
+
+<section id="little-things">
+ <div class="section-head reveal">
+  <div class="eyebrow">A collection of tiny appreciations</div>
+  <h2>Reasons this corner<br>has your name on it.</h2>
+  <p>
+    No fancy speech required. Just a few reminders that your friendship
+    is a lovely little plot twist in my life.
+  </p>
+ </div>
+
+ <div class="note-grid">
+  <article class="note reveal">
+    <span class="emoji">💗</span>
+    <h3>The comfort</h3>
+    <p>It's funny how someone can be online and still feel like a real part of your day. I'm glad our paths crossed, Ayesha<3</p>
+  </article>
+
+  <article class="note reveal">
+    <span class="emoji">⭐</span>
+    <h3>The random moments</h3>
+    <p>The silly conversations in club, the unexpected laughs, the little things that would sound ordinary to anyone else but mean something to us.</p>
+  </article>
+
+  <article class="note reveal">
+    <span class="emoji">🫶🏻</span>
+    <h3>The person you are</h3>
+    <p>I hope this new year of your life brings you kind people, peaceful days, brave beginnings, and reasons to feel proud of yourself, Ameen.</p>
+  </article>
+
+  <article class="note reveal">
+    <span class="emoji">🌷</span>
+    <h3>More good days</h3>
+    <p>May you find happiness in the small stuff too: favourite songs, pretty skies, good food, and messages that arrive right on time.</p>
+  </article>
+
+  <article class="note reveal">
+    <span class="emoji">✨</span>
+    <h3>Main character energy</h3>
+    <p>Today, the universe can absolutely pause its usual business. It's Aishh Day. The imaginary confetti budget is unlimited.</p>
+  </article>
+
+  <article class="note reveal">
+    <span class="emoji">💌</span>
+    <h3>A little wish</h3>
+    <p>Keep your soft heart, keep growing at your own pace, and never feel like you have to become anyone other than yourself.</p>
+  </article>
+ </div>
+</section>
+
+<section id="countdown">
+ <div class="birthday-band reveal">
+  <div class="eyebrow">10 October · your day</div>
+  <h2>Counting down to<br>another year of you 🎂💗</h2>
+
+  <p style="margin-top:15px;color:var(--muted);line-height:1.8">
+    A whole new chapter is waiting for you, birthday girl.
+  </p>
+
+  <div class="countdown" aria-live="polite">
+   <div class="timebox"><strong id="days">--</strong><span>Days</span></div>
+   <div class="timebox"><strong id="hours">--</strong><span>Hours</span></div>
+   <div class="timebox"><strong id="mins">--</strong><span>Minutes</span></div>
+   <div class="timebox"><strong id="secs">--</strong><span>Seconds</span></div>
+  </div>
+
+  <p id="countLabel">Until 10 October arrives 💗</p>
+ </div>
+</section>
+
+<section id="distance">
+ <div class="section-head reveal">
+  <div class="eyebrow">two cities, one friendship</div>
+  <h2>Not next door,<br>still in my orbit. 💞</h2>
+  <p>
+    Islamabad to Jhelum: a little route on the map, and a reminder
+    that distance doesn't get to decide whether someone matters.
+  </p>
+ </div>
+
+ <div class="distance-layout">
+  <div class="map-card reveal">
+   <div class="map-art" role="img" aria-label="Decorative map showing Islamabad and Jhelum connected by a dotted pink route">
+    <div class="road"></div>
+    <div class="map-heart">💗</div>
+    <div class="pin islamabad">📍<small>Fatima · Islamabad</small></div>
+    <div class="pin jhelum">📍<small>Aishh · Jhelum</small></div>
+   </div>
+   <div class="map-caption">a tiny illustrated map, made with love and a little imagination ✨</div>
+  </div>
+
+  <div class="distance-copy reveal">
+   <div class="eyebrow">the friendship express</div>
+   <h3>Different places.<br>Same little sky.</h3>
+   <div class="km">≈ 110 km <span>as the crow flies</span></div>
+
+   <p>
+     The actual road journey is longer and depends on the route, roughly
+     around 150–170 km. But messages don't need petrol, and birthday
+     wishes travel instantly.
+   </p>
+
+   <p>
+     One heart in Islamabad, one heart in Jhelum, and a whole lot of pink between them.
+   </p>
+
+   <a class="map-link"
+     href="https://www.google.com/maps/dir/Islamabad,+Pakistan/Jhelum,+Pakistan/"
+     target="_blank" rel="noopener noreferrer">
+     See the real route on Google Maps ↗
+   </a>
+  </div>
+ </div>
+</section>
+
+<section id="letter">
+ <div class="section-head reveal">
+  <div class="eyebrow">a note from fama</div>
+  <h2>Read this when<br>you need a smile. 💌</h2>
+ </div>
+
+ <div class="letter-wrap reveal">
+  <div class="letter">
+   <div class="stamp">💗 ⭐ 💗</div>
+
+   <p>Happy birthday, Aish!! 🥹💗</p>
+
+   <p>
+     It's still kind of amazing to me that the internet can bring two
+     people from different places into each other's lives. I'm really
+     glad it brought me to you. Even though we're online friends and
+     can't just pop over to each other's houses, I'm grateful for the
+     conversations, the laughs, and all the little moments that make
+     this friendship ours, May Allah bless your Naseeb aswell and grant 
+     you all the happiness and success in this world and the hereafter. Ameen.
+   </p>
+
+   <p>
+     I hope 10 October treats you gently and gives you a thousand
+     reasons to smile. May Allah bless your life with health, happiness,
+     protection, barakah, and people who love you sincerely. May the
+     things you've been quietly wishing for find their way to you at
+     the right time. Ameen. 🤍
+   </p>
+
+   <p>
+     Keep being your lovely self, okay? I hope this next chapter is
+     kinder, brighter, funnier, and full of memories you'll want to
+     keep forever, May you visit the home of our Creator this year Ameen.
+     Haha and I Promise, you'll be our fav person when I & Waleed be together Ameen.
+     Consider this website a tiny hug travelling from
+     Islamabad to Jhelum. 🫂
+   </p>
+
+   <p class="sign">With so much love, Fama ♡</p>
+  </div>
+ </div>
+</section>
+
+<section class="final">
+ <div class="reveal">
+  <div class="big-heart">💗 ✨ 💗</div>
+  <div class="eyebrow">one last thing</div>
+
+  <h2>
+    May life be soft with you,<br>
+    <em style="color:#a84f91">Aishh.</em>
+  </h2>
+
+  <p>
+    Happy birthday for 10 October.<br>
+    Here's to more chats, more laughs, and more lovely little memories. ⭐
+  </p>
+
+  <a class="primary" href="#top"
+     style="display:inline-block;text-decoration:none;margin-top:27px">
+    Back to the top ↑
+  </a>
+ </div>
+</section>
+</main>
+
+<footer>
+  💗 <br>
+  made with love by <strong>Fama</strong> · for Aishh, on her birthday
+</footer>
+
+<script>
+// Floating hearts and stars
+const sparkles = document.getElementById('sparkles');
+const symbols = ['💗','♡','✦','⭐','✨','💕'];
+
+for (let i = 0; i < 34; i++) {
+  const el = document.createElement('span');
+  el.className = 'floaty';
+  el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+  el.style.left = Math.random() * 100 + '%';
+  el.style.animationDuration = (13 + Math.random() * 20) + 's';
+  el.style.animationDelay = (-Math.random() * 25) + 's';
+  el.style.fontSize = (10 + Math.random() * 16) + 'px';
+  sparkles.appendChild(el);
+}
+
+// Reveal sections as they enter the screen
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: .12 });
+
+document.querySelectorAll('.reveal:not(.show)').forEach(el => {
+  observer.observe(el);
+});
+
+// Countdown to the next 10 October
+function updateCountdown() {
+  const now = new Date();
+  let target = new Date(now.getFullYear(), 9, 10, 0, 0, 0);
+
+  if (now >= target) {
+    target = new Date(now.getFullYear() + 1, 9, 10, 0, 0, 0);
+  }
+
+  const diff = Math.max(0, target - now);
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor(diff % 86400000 / 3600000);
+  const mins = Math.floor(diff % 3600000 / 60000);
+  const secs = Math.floor(diff % 60000 / 1000);
+
+  document.getElementById('days').textContent = String(days).padStart(2, '0');
+  document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('mins').textContent = String(mins).padStart(2, '0');
+  document.getElementById('secs').textContent = String(secs).padStart(2, '0');
+
+  const label = document.getElementById('countLabel');
+
+  if (now.getMonth() === 9 && now.getDate() === 10) {
+    label.textContent = "IT'S AISHH DAY!! HAPPY BIRTHDAY, AISHH! 🎂💗";
+  } else {
+    label.textContent = 'Until 10 October arrives 💗';
+  }
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// Music controls
+// Browsers may block automatic playback until the visitor interacts.
+const audio = document.getElementById('birthdaySong');
+const musicBtn = document.getElementById('musicBtn');
+
+async function startMusic() {
+  try {
+    await audio.play();
+    musicBtn.textContent = '♫ Music is playing';
+    musicBtn.setAttribute('aria-label', 'Pause birthday music');
+  } catch (error) {
+    musicBtn.textContent = '♫ Tap to play music';
+  }
+}
+
+function stopMusic() {
+  audio.pause();
+  musicBtn.textContent = '♫ Play our song';
+  musicBtn.setAttribute('aria-label', 'Play birthday music');
+}
+
+musicBtn.addEventListener('click', () => {
+  if (!audio.paused) {
+    stopMusic();
+  } else {
+    startMusic();
+  }
+});
+
+window.addEventListener('load', startMusic);
+
+audio.addEventListener('error', () => {
+  musicBtn.textContent = '♫ Add aishh-song.mp3';
+});
+</script>
+</body>
+</html>
